@@ -1,0 +1,249 @@
+/* ============================================
+   NAVBAR MODULE CSS — COMPLETE UPDATED VERSION
+   ============================================ */
+
+.nbRoot {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  z-index: 50;
+  font-family: 'DM Sans', sans-serif;
+  transition: background .5s cubic-bezier(.16,1,.3,1),
+              border-color .5s cubic-bezier(.16,1,.3,1),
+              backdrop-filter .5s;
+}
+
+.nbScrolled {
+  background: rgba(255,255,255,.04);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+
+.nbInner {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 70px;
+  transition: height .4s cubic-bezier(.16,1,.3,1);
+}
+
+.nbScrolled .nbInner { height: 58px; }
+
+.nbLogo {
+  display: flex; align-items: center;
+  text-decoration: none; flex-shrink: 0;
+  cursor: pointer; background: none; border: none; padding: 0;
+}
+
+.nbLogoImg {
+  height: 34px; width: auto;
+  object-fit: contain; opacity: .9;
+  transition: opacity .3s;
+}
+
+.nbLogo:hover .nbLogoImg { opacity: 1; }
+
+.nbLinks { display: flex; align-items: center; gap: 2.25rem; }
+
+.nbLink {
+  font-size: .72rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.60);
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 3px;
+  transition: color .22s;
+}
+
+.nbLink::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0; height: .5px;
+  background: linear-gradient(90deg, rgba(196,170,255,.9), rgba(167,139,250,.6));
+  transition: width .28s cubic-bezier(.16,1,.3,1);
+}
+
+.nbLink:hover { color: rgba(196,170,255,.9); }
+.nbLink:hover::after { width: 100%; }
+
+.nbCta {
+  font-size: .7rem;
+  font-weight: 500;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: .65rem 1.6rem;
+  border-radius: 999px;
+  border: 1px solid rgba(167,139,250,.6);
+  background: linear-gradient(135deg,
+    rgba(109,40,217,.9)  0%,
+    rgba(139,92,246,.95) 50%,
+    rgba(124,58,237,.9)  100%
+  );
+  color: rgba(255,255,255,.95);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(109,40,217,.3),
+              inset 0 1px 0 rgba(255,255,255,.12);
+  transition: box-shadow .3s, transform .2s, border-color .3s;
+}
+
+/* ============================================
+   BURGER BUTTON
+   ============================================ */
+
+.nbBurger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  padding: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  z-index: 51; /* فوق الـ overlay عشان يبان دايماً */
+}
+
+.nbBurger span {
+  display: block;
+  width: 22px;
+  height: .5px;
+  background: rgba(255,255,255,.55);
+  border-radius: 1px;
+  transition: transform .35s cubic-bezier(.16,1,.3,1), opacity .25s;
+  transform-origin: center;
+}
+
+/* Burger → X animation */
+.nbOpen span:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
+.nbOpen span:nth-child(2) { opacity: 0; }
+.nbOpen span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
+
+/* ============================================
+   FULLSCREEN OVERLAY DRAWER
+   ============================================ */
+
+.nbDrawer {
+  /* Fullscreen fixed overlay — يغطي الصفحة كلها */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+
+  /* Glass morphism background */
+  background: rgba(5, 0, 20, 0.78);
+  backdrop-filter: blur(28px) saturate(160%);
+  -webkit-backdrop-filter: blur(28px) saturate(160%);
+
+  /* Center the menu card */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Hidden state */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .4s cubic-bezier(.16, 1, .3, 1);
+
+  /* تحت الـ navbar (z-index: 50) وفوق كل حاجة تانية */
+  z-index: 49;
+}
+
+.nbDrawerOpen {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.nbDrawerInner {
+  width: min(400px, 88vw);
+  box-sizing: border-box;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 20px;
+  padding: 2rem 2.5rem 2.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow: 0 8px 48px rgba(0, 0, 0, 0.45),
+              inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.nbMLink {
+  font-size: .88rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.50);
+  text-decoration: none;
+  padding: .95rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  display: block;
+  width: 100%;
+  text-align: center;
+  transition: color .22s ease;
+}
+
+.nbMLink:last-of-type {
+  border-bottom: none;
+}
+
+.nbMLink:hover {
+  color: rgba(196, 170, 255, 0.9);
+}
+
+.nbMCta {
+  margin-top: 1.75rem;
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-size: .72rem;
+  font-weight: 500;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: .85rem 1.5rem;
+  border-radius: 999px;
+  border: 1px solid rgba(167, 139, 250, .6);
+  background: linear-gradient(135deg,
+    rgba(109, 40, 217, .9)  0%,
+    rgba(139, 92, 246, .95) 50%,
+    rgba(124, 58, 237, .9)  100%
+  );
+  color: rgba(255, 255, 255, .95);
+  text-decoration: none;
+  box-shadow: 0 4px 20px rgba(109, 40, 217, .35),
+              inset 0 1px 0 rgba(255, 255, 255, .12);
+  transition: box-shadow .3s, transform .2s;
+}
+
+.nbMCta:hover {
+  box-shadow: 0 6px 28px rgba(109, 40, 217, .5),
+              inset 0 1px 0 rgba(255, 255, 255, .15);
+  transform: translateY(-1px);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 767px) {
+  .nbLinks, .nbCta { display: none; }
+  .nbBurger { display: flex; }
+}

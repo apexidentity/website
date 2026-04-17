@@ -1,0 +1,345 @@
+.fsRoot {
+  font-family: 'Outfit', sans-serif;
+  background: #050505;
+  color: #fff;
+  padding: clamp(4.5rem, 9vw, 8rem) 0;
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid rgba(255,255,255,.04);
+}
+
+.fsBlob {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(110px);
+  opacity: .65;
+}
+
+.fsBlobA {
+  width: min(520px, 75vw); height: min(520px, 75vw);
+  top: -100px; right: -100px;
+  background: rgba(109,40,217,.18);
+}
+
+.fsBlobB {
+  width: min(360px, 60vw); height: min(360px, 60vw);
+  bottom: 0; left: -70px;
+  background: rgba(139,92,246,.13);
+}
+
+.fsWrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 2vw, 3rem);
+  position: relative;
+  z-index: 1;
+}
+
+.fsHd {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+.fsLabel {
+  font-size: .58rem;
+  letter-spacing: .35em;
+  text-transform: uppercase;
+  color: rgba(167,139,250,.45);
+  display: flex;
+  align-items: center;
+  gap: .65rem;
+  margin-bottom: 1.1rem;
+}
+
+.fsPip {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: rgba(139,92,246,1);
+  box-shadow: 0 0 8px rgba(139,92,246,.85);
+  flex-shrink: 0;
+  animation: pipPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes pipPulse {
+  0%,100% { opacity:.45; box-shadow:0 0 5px rgba(139,92,246,.5); }
+  50% { opacity:1; box-shadow:0 0 12px rgba(139,92,246,.9); }
+}
+
+.fsH2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: clamp(2.6rem, 5vw, 4.5rem);
+  line-height: 1.0;
+  letter-spacing: -.025em;
+  color: rgba(255,255,255,.93);
+  margin: 0;
+}
+
+.fsH2 em {
+  font-style: italic;
+  background: linear-gradient(125deg, rgba(255,255,255,.95) 0%, rgba(196,170,255,.88) 45%, rgba(139,92,246,.82) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.fsHdMeta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: .35rem;
+  flex-shrink: 0;
+}
+
+.fsHdCount {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(4.5rem, 9vw, 7.5rem);
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(139,92,246,.06);
+  line-height: 1;
+  letter-spacing: -.03em;
+  user-select: none;
+}
+
+.fsHdSub {
+  font-size: .55rem;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.1);
+}
+
+.fsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top: 1px solid rgba(255,255,255,.07);
+  border-left: 1px solid rgba(255,255,255,.07);
+}
+
+/* Cell */
+.fsCell {
+  border-right: 1px solid rgba(255,255,255,.07);
+  border-bottom: 1px solid rgba(255,255,255,.07);
+  padding: clamp(1.5rem, 3.5vw, 2.5rem) clamp(1.25rem, 3vw, 2.25rem);
+  display: flex;
+  gap: clamp(.85rem, 2vw, 1.5rem);
+  align-items: flex-start;
+  position: relative;
+  overflow: hidden;
+  cursor: default;
+  transition: background .4s cubic-bezier(.16,1,.3,1);
+}
+
+.fsCell:hover { background: rgba(139,92,246,.04); }
+
+.fsGhost {
+  position: absolute;
+  bottom: -.5rem;
+  right: .75rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(4.5rem, 9vw, 7rem);
+  font-style: italic;
+  font-weight: 300;
+  color: rgba(255,255,255,.022);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  letter-spacing: -.04em;
+  transition: color .45s;
+}
+
+.fsCell:hover .fsGhost { color: rgba(139,92,246,.06); }
+
+/* Photo */
+.fsPhoto {
+  width: clamp(72px, 13vw, 108px);
+  flex-shrink: 0;
+  aspect-ratio: 3 / 4;
+  border-radius: 7px;
+  overflow: hidden;
+  background: rgba(139,92,246,.1);
+  position: relative;
+}
+
+.fsPhoto::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 7px;
+  border: 1px solid rgba(167,139,250,0);
+  transition: border-color .4s;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.fsCell:hover .fsPhoto::after { border-color: rgba(167,139,250,.25); }
+
+.fsPhoto img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  filter: grayscale(30%) brightness(.72);
+  transition: filter .55s cubic-bezier(.16,1,.3,1), transform .65s cubic-bezier(.16,1,.3,1);
+}
+
+.fsCell:hover .fsPhoto img {
+  filter: grayscale(0%) brightness(.9);
+  transform: scale(1.06);
+}
+
+.fsInitials {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  color: rgba(196,170,255,.6);
+  letter-spacing: .06em;
+}
+
+/* Body */
+.fsBody { display: flex; flex-direction: column; flex: 1; min-width: 0; }
+
+.fsNum {
+  font-size: .56rem;
+  letter-spacing: .25em;
+  color: rgba(167,139,250,.2);
+  font-weight: 400;
+  margin-bottom: .45rem;
+  transition: color .35s;
+}
+
+.fsCell:hover .fsNum { color: rgba(167,139,250,.52); }
+
+.fsName {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.15rem, 2.4vw, 1.7rem);
+  font-weight: 400;
+  letter-spacing: -.015em;
+  line-height: 1.15;
+  color: rgba(255,255,255,.87);
+  margin: 0 0 .35rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: color .35s;
+}
+
+.fsCell:hover .fsName { color: rgba(255,255,255,1); }
+
+.fsRole {
+  font-size: .565rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: rgba(167,139,250,.3);
+  font-weight: 400;
+  transition: color .35s;
+  margin-bottom: .9rem;
+}
+
+.fsCell:hover .fsRole { color: rgba(167,139,250,.6); }
+
+.fsDesc {
+  font-size: .7rem;
+  font-weight: 300;
+  line-height: 1.85;
+  color: rgba(255,255,255,.2);
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: color .35s;
+  margin-bottom: 1rem;
+}
+
+.fsCell:hover .fsDesc { color: rgba(255,255,255,.35); }
+
+/* Socials */
+.fsSocs {
+  display: flex;
+  gap: .45rem;
+  margin-top: auto;
+  opacity: 0;
+  transform: translateY(7px);
+  transition: opacity .32s cubic-bezier(.16,1,.3,1), transform .32s cubic-bezier(.16,1,.3,1);
+}
+
+.fsCell:hover .fsSocs { opacity: 1; transform: translateY(0); }
+
+@media (hover: none) {
+  .fsSocs { opacity: 1 !important; transform: none !important; }
+}
+
+.fsSoc {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  border: 1px solid rgba(167,139,250,.12);
+  color: rgba(167,139,250,.3);
+  text-decoration: none;
+  transition: border-color .22s, color .22s, background .22s, transform .22s;
+  flex-shrink: 0;
+}
+
+.fsSoc:hover {
+  border-color: rgba(167,139,250,.5);
+  color: rgba(167,139,250,.9);
+  background: rgba(109,40,217,.2);
+  transform: translateY(-2px);
+}
+
+.fsFoot {
+  margin-top: clamp(2rem, 4vw, 3.5rem);
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.fsFl, .fsFr { flex: 1; height: 1px; background: linear-gradient(to right, rgba(167,139,250,.12), transparent); }
+.fsFr { background: linear-gradient(to left, rgba(167,139,250,.12), transparent); }
+
+.fsFt {
+  font-size: .56rem;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.09);
+  white-space: nowrap;
+}
+
+/* Entrance Animations - Scoped to global class applied via Client Component */
+.fsA {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity .85s cubic-bezier(.16,1,.3,1), transform .85s cubic-bezier(.16,1,.3,1);
+}
+
+.fsRoot :global(.fsI) {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* Responsive */
+@media (max-width: 800px) {
+  .fsHdMeta { display: none; }
+  .fsDesc { -webkit-line-clamp: 2; }
+  .fsPhoto { aspect-ratio: 1 / 1; }
+}
+
+@media (max-width: 540px) {
+  .fsGrid { grid-template-columns: minmax(0, 1fr); }
+  .fsDesc { display: none; }
+  .fsPhoto { width: 64px; aspect-ratio: 1 / 1; }
+  .fsName { font-size: 1.25rem; }
+  .fsSocs { opacity: 1; transform: none; }
+}

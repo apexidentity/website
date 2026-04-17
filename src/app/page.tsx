@@ -1,13 +1,13 @@
-import FloatingButtons from '@/components/FloatingButtons'
-import Navbar from '@/components/Navbar'
-import Hero from '@/components/Hero'
-import About from '@/components/About'
-import Founders from '@/components/Founders'
-import Services from '@/components/Services'
-import Packages from '@/components/Packages'
-import Portfolio from '@/components/Portfolio'
-import Testimonials from '@/components/Testimonials'
-import Footer from '@/components/Footer'
+import FloatingButtons from '@/components/FloatingButtons/FloatingButtons.server'
+import Navbar from '@/components/navbar/Navbar.server'
+import Hero from '@/components/hero/Hero.server'
+import About from '@/components/about/About.server'
+import Founders from '@/components/founders/Founders.server'
+import Services from '@/components/services/Services.server'
+import Packages from '@/components/packages/Packages.server'
+import Portfolio from '@/components/portfolio/Portfolio.server'
+import Testimonials from '@/components/testimonials/Testimonials.server'
+import Footer from '@/components/footer/Footer.server'
 
 export default function Home() {
   return (

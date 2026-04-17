@@ -1,6 +1,6 @@
-import Navbar from '@/components/Navbar'
-import Footer from '@/components/Footer'
-import Privacy from '@/components/Privacy'
+import Navbar from '@/components/navbar/Navbar.server'
+import Footer from '@/components/footer/Footer.server'
+import Privacy from '@/components/Privacy/Privacy.server'
 
 export const metadata = {
   title: 'Privacy Policy — Apex Identity',

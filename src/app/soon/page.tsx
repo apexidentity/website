@@ -1,6 +1,6 @@
-import Navbar from '@/components/Navbar'
-import Footer from '@/components/Footer'
-import Soon from '@/components/Soon'
+import Navbar from '@/components/navbar/Navbar.server'
+import Footer from '@/components/footer/Footer.server'
+import Soon from '@/components/ComingSoon/ComingSoon.server'
 
 export const metadata = {
   title: 'Comming Soon — Apex Identity',

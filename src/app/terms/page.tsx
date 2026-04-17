@@ -1,6 +1,6 @@
-import Navbar from '@/components/Navbar'
-import Footer from '@/components/Footer'
-import Terms from '@/components/Terms'
+import Navbar from '@/components/navbar/Navbar.server'
+import Footer from '@/components/footer/Footer.server'
+import Terms from '@/components/Terms/Terms.server'
 
 export const metadata = {
   title: 'Terms of Service — Apex Identity',
