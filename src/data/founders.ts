@@ -1,3 +1,5 @@
+import type { Founder } from '@/types/founders';
+
 export const FOUNDERS: Founder[] = [
   {
     id: '01',
