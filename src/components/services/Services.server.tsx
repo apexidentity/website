@@ -6,27 +6,38 @@ import styles from './services.module.css';
 export default function ServicesSection() {
   return (
     <div className={styles.globalWrapper}>
-      {/* Gallery Section */}
+
+      {/* ── GALLERY SECTION ── */}
       <section id="work" className={styles.glSection}>
+
+        {/* Vignette masks */}
         <div className={`${styles.glVignette} ${styles.glVignetteLeft}`} aria-hidden="true" />
         <div className={`${styles.glVignette} ${styles.glVignetteRight}`} aria-hidden="true" />
-        
-        <div className={`${styles.glBgBlob} ${styles.glBlob1}`} />
-        <div className={`${styles.glBgBlob} ${styles.glBlob2}`} />
-        <div className={styles.glTopLine} />
 
+        {/* Ambient glows */}
+        <div className={`${styles.glGlow} ${styles.glGlow1}`} aria-hidden="true" />
+        <div className={`${styles.glGlow} ${styles.glGlow2}`} aria-hidden="true" />
+
+        {/* Top accent line */}
+        <div className={styles.glTopLine} aria-hidden="true" />
+
+        {/* Heading block */}
         <div className={styles.glInner}>
-          <span className={`${styles.svEyebrow} pf3`}>Our Work</span>
-          <h2 className={`${styles.svHeading} pf3`} style={{ transitionDelay: '.08s' }}>
+          <div className={styles.glEyebrow}>
+            <span className={styles.glEyebrowDot} />
+            Our Work
+          </div>
+          <h2 className={styles.svHeading}>
             Crafted to <em>perform.</em>
           </h2>
-          <p className={`${styles.svSub} pf3`} style={{ transitionDelay: '.14s' }}>
+          <p className={styles.svSub}>
             A selection of documents from our portfolio.
           </p>
         </div>
 
-        {/* Client side interaction for Carousel and Accordion */}
+        {/* Client: Carousel + Accordion */}
         <ServicesClient templates={TEMPLATES} services={SERVICES} />
+
       </section>
     </div>
   );
