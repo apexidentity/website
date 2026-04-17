@@ -46,7 +46,7 @@ export default function Footer() {
           
           <div className={`${styles.ft2BrandCol} ${styles.ft2Reveal}`} style={{ transitionDelay: '.05s' } as React.CSSProperties}>
             <Link href="/">
-              <img src="/logo.webp" alt="Apex Identity" className={styles.ft2LogoImg} />
+              <img src="https://res.cloudinary.com/dncdx1dm9/image/upload/q_auto/f_auto/v1776413343/logo_lhzxyp.webp" alt="Apex Identity" className={styles.ft2LogoImg} />
             </Link>
             <p className={styles.ft2BrandDesc}>
               Premium career identity services for ambitious professionals across Egypt, the Gulf, and beyond.

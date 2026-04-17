@@ -19,7 +19,7 @@ const NavLogo = () => {
 
   return (
     <button className={styles.nbLogo} onClick={handleLogoClick}>
-      <img src="/logo.webp" alt="Apex Identity" className={styles.nbLogoImg} />
+      <img src="https://res.cloudinary.com/dncdx1dm9/image/upload/q_auto/f_auto/v1776413343/logo_lhzxyp.webp" alt="Apex Identity" className={styles.nbLogoImg} />
     </button>
   );
 };
