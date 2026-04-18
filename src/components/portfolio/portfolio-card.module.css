@@ -139,3 +139,15 @@
   0% { transform: translateX(-100%); }
   100% { transform: translateX(300%); }
 }
+
+/* ── Small screens: cards always lit (no hover on touch) ── */
+@media (max-width: 768px) {
+  .portCard {
+    background: rgba(255,255,255,0.07);
+    border-color: rgba(167,139,250,.35);
+  }
+  .portCard::before { opacity: 1; }
+  .portTitle        { color: #fff; }
+  .portDesc         { color: rgba(255,255,255,.5); }
+  .portLinkIcon     { color: #fff; }
+}

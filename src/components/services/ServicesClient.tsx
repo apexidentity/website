@@ -13,65 +13,29 @@ interface Props {
 export default function ServicesClient({ templates, services }: Props) {
   const [active, setActive] = useState(0);
   const [openIndex, setOpenIndex] = useState<number | null>(0);
-  const [revealed, setRevealed] = useState(false);
   const n = templates.length;
   const sectionRef = useRef<HTMLDivElement>(null);
-  const autoRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  // Scroll reveal with IntersectionObserver — class-based only
+  // Scroll reveal — pf3 / pv3 (first-file pattern)
   useEffect(() => {
-    const elements = sectionRef.current?.querySelectorAll(`.${styles.reveal}`);
-    if (!elements?.length) return;
-
     const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            requestAnimationFrame(() => {
-              e.target.classList.add(styles.revealVisible);
-            });
-            io.unobserve(e.target);
-          }
-        });
-      },
-      { threshold: 0.06, rootMargin: '0px 0px -40px 0px' }
+      entries => entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add(styles.pv3);
+          io.unobserve(e.target);
+        }
+      }),
+      { threshold: 0.06 }
     );
-
-    elements.forEach((el) => io.observe(el));
+    sectionRef.current?.querySelectorAll(`.${styles.pf3}`).forEach(el => io.observe(el));
     return () => io.disconnect();
   }, []);
 
-  // Gallery section entrance
-  useEffect(() => {
-    const timer = setTimeout(() => setRevealed(true), 100);
-    return () => clearTimeout(timer);
-  }, []);
-
-  // Auto-advance carousel
-  const resetAuto = useCallback(() => {
-    if (autoRef.current) clearInterval(autoRef.current);
-    autoRef.current = setInterval(() => {
-      setActive((i) => (i + 1) % n);
-    }, 4500);
-  }, [n]);
-
-  useEffect(() => {
-    resetAuto();
-    return () => { if (autoRef.current) clearInterval(autoRef.current); };
-  }, [resetAuto]);
-
-  const goPrev = useCallback(() => {
-    setActive((i) => (i - 1 + n) % n);
-    resetAuto();
-  }, [n, resetAuto]);
-
-  const goNext = useCallback(() => {
-    setActive((i) => (i + 1) % n);
-    resetAuto();
-  }, [n, resetAuto]);
+  const goPrev = useCallback(() => setActive(i => (i - 1 + n) % n), [n]);
+  const goNext = useCallback(() => setActive(i => (i + 1) % n), [n]);
 
   const toggleAccordion = useCallback((i: number) => {
-    setOpenIndex((prev) => (prev === i ? null : i));
+    setOpenIndex(prev => (prev === i ? null : i));
   }, []);
 
   const accordionHandlers = useMemo(
@@ -81,8 +45,8 @@ export default function ServicesClient({ templates, services }: Props) {
 
   return (
     <>
-      {/* ── GALLERY ── */}
-      <div className={`${styles.glStage} ${revealed ? styles.glStageVisible : ''}`}>
+      {/* ── GALLERY STAGE ── */}
+      <div className={styles.glStage}>
         {templates.map((t, i) => (
           <GalleryItem
             key={t.id}
@@ -96,51 +60,49 @@ export default function ServicesClient({ templates, services }: Props) {
         ))}
       </div>
 
-      {/* ── CONTROLS ── */}
+      {/* ── CONTROLS — dots (first-file style) ── */}
       <div className={styles.glControls}>
         <button className={styles.glBtn} onClick={goPrev} aria-label="Previous">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-            <path d="M10 3L5 8l5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <path d="M9 2L4 7l5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </button>
 
-        <div className={styles.glTrack}>
-          <div
-            className={styles.glTrackFill}
-            style={{ width: `${((active + 1) / n) * 100}%` }}
-          />
+        <div className={styles.glDots}>
+          {templates.map((_, i) => (
+            <button
+              key={i}
+              className={`${styles.glDot} ${i === active ? styles.glDotActive : ''}`}
+              onClick={() => setActive(i)}
+              aria-label={`Slide ${i + 1}`}
+            />
+          ))}
         </div>
 
-        <span className={styles.glCount}>
-          <span className={styles.glCountCurrent}>{String(active + 1).padStart(2, '0')}</span>
-          <span className={styles.glCountSep}>/</span>
-          <span className={styles.glCountTotal}>{String(n).padStart(2, '0')}</span>
-        </span>
-
         <button className={styles.glBtn} onClick={goNext} aria-label="Next">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-            <path d="M6 3l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <path d="M5 2l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </button>
       </div>
 
-      {/* ── ACCORDION ── */}
+      {/* ── ACCORDION SECTION ── */}
       <section id="services" className={styles.accSection} ref={sectionRef}>
-        <div className={styles.accNoise} aria-hidden="true" />
         <div className={`${styles.accGlow} ${styles.accGlow1}`} aria-hidden="true" />
         <div className={`${styles.accGlow} ${styles.accGlow2}`} aria-hidden="true" />
 
         <div className={styles.accInner}>
 
-          {/* Header */}
-          <div className={`${styles.accHeaderBlock} ${styles.reveal}`}>
-            <div className={styles.accPill}>
-              <span className={styles.accPillDot} />
-              What We Do
+          {/* Header — eyebrow badge with rules (first-file style) */}
+          <div className={`${styles.accHeaderBlock} ${styles.pf3}`}>
+            <div className={styles.accEyebrowWrap}>
+              <div className={styles.accEyebrowRule} />
+              <span className={styles.accEyebrowBadge}>What We Do</span>
+              <div className={`${styles.accEyebrowRule} ${styles.accEyebrowRuleR}`} />
             </div>
             <h2 className={styles.accHeading}>
-              Every tool you need to
-              <span className={styles.accHeadingEm}> land the role you deserve.</span>
+              Every tool you need to<br />
+              <em>land the role you deserve.</em>
             </h2>
             <p className={styles.accSub}>
               Six services. One outcome —{' '}
@@ -149,7 +111,8 @@ export default function ServicesClient({ templates, services }: Props) {
           </div>
 
           {/* List */}
-          <div className={`${styles.accList} ${styles.reveal}`} style={{ transitionDelay: '0.16s' }}>
+          <div className={`${styles.accList} ${styles.pf3}`} style={{ transitionDelay: '.16s' }}>
+            <div className={styles.accListBorder} />
             {services.map((s, i) => (
               <AccordionItem
                 key={s.num}
@@ -161,13 +124,14 @@ export default function ServicesClient({ templates, services }: Props) {
             ))}
           </div>
 
-          {/* CTA */}
-          <div className={`${styles.accCtaWrap} ${styles.reveal}`} style={{ transitionDelay: '0.24s' }}>
+          {/* CTA — line + button (first-file style) */}
+          <div className={`${styles.accCtaWrap} ${styles.pf3}`} style={{ transitionDelay: '.2s' }}>
+            <div className={styles.accCtaLine} />
             <a href="#packages" className={styles.accCtaBtn}>
-              <span className={styles.accCtaBtnText}>Start Your Elevation</span>
+              Start Your Elevation
               <span className={styles.accCtaBtnIcon} aria-hidden="true">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path d="M2 12L12 2M12 2H6M12 2V8" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </span>
             </a>

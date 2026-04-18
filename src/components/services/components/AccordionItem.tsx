@@ -13,12 +13,13 @@ interface Props {
 
 const AccordionItem = memo(({ service, isOpen, onClick }: Props) => (
   <div className={`${styles.accItem} ${isOpen ? styles.accItemOpen : ''}`}>
+
     <button
       className={styles.accTrigger}
       onClick={onClick}
       aria-expanded={isOpen}
     >
-      {/* Number — styled like packages .tierLabel */}
+      {/* Number — serif italic (first-file style) */}
       <span className={styles.accNum}>{service.num}</span>
 
       {/* Title + tag */}
@@ -27,35 +28,52 @@ const AccordionItem = memo(({ service, isOpen, onClick }: Props) => (
         <span className={styles.accTag}>{service.tag}</span>
       </span>
 
-      {/* Chevron — styled like packages .tierBadge */}
+      {/* Chevron — rotates to × (first-file style) */}
       <span className={styles.accChevron} aria-hidden="true">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
           <path
-            d="M3 5l4 4 4-4"
-            stroke="currentColor"
-            strokeWidth="1.4"
+            d="M5.5 1v9M1 5.5h9"
+            stroke="rgba(196,170,255,0.9)"
+            strokeWidth="1.3"
             strokeLinecap="round"
-            strokeLinejoin="round"
           />
         </svg>
       </span>
     </button>
 
-    {/* CSS max-height transition — zero JS height measurement */}
+    {/* Body — grid-template-rows animation (first-file style) */}
     <div className={styles.accBody} aria-hidden={!isOpen}>
       <div className={styles.accBodyInner}>
-        <p className={styles.accDesc}>{service.description}</p>
-        <div className={styles.accNeedWrap}>
-          <span className={styles.accNeedIcon} aria-hidden="true">
-            <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
-              <circle cx="6.5" cy="6.5" r="5.5" stroke="currentColor" strokeWidth="1.1" />
-              <path d="M6.5 4v3.2M6.5 8.8v.4" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" />
-            </svg>
-          </span>
-          <p className={styles.accNeed}>{service.need}</p>
+        {/* Two-column layout (first-file style) */}
+        <div className={styles.accBodyContent}>
+
+          {/* Left: description + CTA link */}
+          <div>
+            <p className={styles.accDesc}>{service.description}</p>
+            <a href="#packages" className={styles.accCtaLink}>
+              Get started
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
+                <path
+                  d="M1 10L10 1M10 1H4M10 1V7"
+                  stroke="currentColor"
+                  strokeWidth="1.2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </a>
+          </div>
+
+          {/* Right: "Why you need it" (first-file style) */}
+          <div>
+            <div className={styles.accNeedLabel}>Why you need it</div>
+            <p className={styles.accNeed}>{service.need}</p>
+          </div>
+
         </div>
       </div>
     </div>
+
   </div>
 ));
 

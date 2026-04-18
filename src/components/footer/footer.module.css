@@ -131,9 +131,9 @@
 }
 
 .ft2Body {
-  max-width: 1200px;
+  max-width: 1275px;
   margin: 0 auto;
-  padding: 4rem 1rem 2.5rem;
+  padding: 4rem 4rem 2.5rem;
   position: relative;
   z-index: 1;
 }
@@ -255,6 +255,10 @@
   .ft2Grid { grid-template-columns: 1fr 1fr 1fr; gap: 2.5rem; }
   .ft2BrandCol { grid-column: span 3; }
   .ft2BrandDesc { max-width: 40ch; }
+}
+
+@media (max-width:767px) {
+  .ft2Body { padding: 4rem 1.7rem 2.5rem; }
 }
 
 @media (max-width:639px) {
