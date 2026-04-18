@@ -57,7 +57,7 @@
   position: relative;
   width: 100vw;
   margin-left: calc(-50vw + 50%);
-  overflow-x: hidden; /* ← ضمان ضد أي scroll أفقي */
+  overflow-x: hidden;
 }
 
 /* Top accent line */
@@ -163,7 +163,7 @@
   width: 100%;
   height: calc(var(--cw) * 297 / 210);
   margin: clamp(2.5rem, 5vw, 4rem) 0 0;
-  overflow: hidden; /* يقطع الكروت اللي بتطلع برا */
+  overflow: hidden;
 }
 
 /* ── GALLERY ITEMS ───────────────────────────────────────────────── */
@@ -172,6 +172,9 @@
   width: var(--cw); aspect-ratio: 210 / 297;
   border-radius: 10px; overflow: hidden;
   will-change: transform, opacity;
+  /* ✅ إضافة backface-visibility عشان GPU layer مضمون على الموبايل */
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
   transition: transform .55s cubic-bezier(.23,1,.32,1), opacity .55s cubic-bezier(.23,1,.32,1);
   isolation: isolate;
 }
@@ -538,17 +541,6 @@
    RESPONSIVE
    ═══════════════════════════════════════════════════════════════════ */
 
-/*
- * الحسبة الجديدة — كارد وسطاني أكبر + offset أضيق للجانبيين:
- *
- * offset الجانبيين بيتغير على موبايل من 0.87 → 0.62
- * أقصى يمين = 50vw + (0.62 × cw) + (0.74 × cw / 2)
- *           = 50vw + 0.62cw + 0.37cw
- *           = 50vw + 0.99cw
- * مع cw = 48vw: 50 + 0.99×48 = 50 + 47.5 = 97.5vw ✓
- * الـ overflow:hidden على .glStage بيعمل clipping ناعم للأطراف
- */
-
 /* ── 900px — تابلت ── */
 @media (max-width: 900px) {
   .glStage { --cw: min(240px, 30vw); }
@@ -572,11 +564,6 @@
   .glInner   { padding: 0 1.25rem; }
   .svHeading { font-size: clamp(2.2rem, 9vw, 3rem) !important; }
 
-  /*
-   * cw = 48vw — كارد وسطاني كبير وواضح
-   * الجانبيين بيتقربوا للوسط (offset 0.62 بدل 0.87)
-   * 50vw + 0.99 × 48vw = 97.5vw ✓ مفيش overflow
-   */
   .glStage { --cw: 48vw; }
   .glLL, .glRR { display: none; }
 
@@ -605,9 +592,6 @@
 
 /* ── 480px — موبايل صغير ── */
 @media (max-width: 480px) {
-  /*
-   * cw = 46vw → 50 + 0.99×46 = 95.5vw ✓
-   */
   .glStage { --cw: 46vw; }
 
   .glL { transform: translate3d(calc(-50% - var(--cw) * 0.62), -50%, 0) scale(0.74); opacity: .55; }
@@ -616,9 +600,6 @@
 
 /* ── 380px — موبايل صغير جداً ── */
 @media (max-width: 380px) {
-  /*
-   * cw = 44vw → 50 + 0.99×44 = 93.6vw ✓
-   */
   .glStage { --cw: 44vw; }
 
   .glL { transform: translate3d(calc(-50% - var(--cw) * 0.62), -50%, 0) scale(0.74); opacity: .55; }

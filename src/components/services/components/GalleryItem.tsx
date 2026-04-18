@@ -24,6 +24,8 @@ function getSlot(index: number, active: number, total: number): number {
 const isAbsoluteUrl = (src: string): boolean =>
   src.startsWith('http://') || src.startsWith('https://') || src.startsWith('/');
 
+// ✅ الـ custom comparator اتمسح — React هيعمل re-render طبيعي لكل الكروت
+//    في نفس الوقت وده بيمنع الـ lag على الموبايل
 const GalleryItem = memo(
   ({ template, index, active, total, goNext, goPrev }: Props) => {
     const slot = useMemo(
@@ -81,16 +83,10 @@ const GalleryItem = memo(
             <div className={styles.glPhFooter} />
           </div>
         )}
-        {/* glLabel removed — no "Template 00" text on cards */}
       </div>
     );
-  },
-  (prev, next) => {
-    return (
-      getSlot(prev.index, prev.active, prev.total) ===
-      getSlot(next.index, next.active, next.total)
-    );
   }
+  // ❌ الـ custom comparator اتشالت من هنا
 );
 
 GalleryItem.displayName = 'GalleryItem';
