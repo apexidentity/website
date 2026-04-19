@@ -31,8 +31,8 @@
 }
 
 /* ─── Animations ─────────────────────────────────────────── */
-@keyframes driftA      { from { transform: translate(0, 0); } to { transform: translate(3%, 4%); } }
-@keyframes driftB      { from { transform: translate(0, 0); } to { transform: translate(-4%, -3%); } }
+@keyframes driftA      { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(3%, 4%, 0); } }
+@keyframes driftB      { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(-4%, -3%, 0); } }
 @keyframes accentPulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
 @keyframes shimmer     { 0% { transform: translateX(-100%); } 100% { transform: translateX(300%); } }
 @keyframes fadeUp      { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
@@ -57,8 +57,12 @@
   position: relative;
   width: 100vw;
   margin-left: calc(-50vw + 50%);
-  overflow-x: hidden;
+  /* ✅ FIX: إخفاء الـ scrollbar الموف القبيح */
+  overflow: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
+.glSection::-webkit-scrollbar { display: none; }
 
 /* Top accent line */
 .glTopLine {
@@ -76,7 +80,8 @@
 
 /* Overflow clip */
 .glOverflowClip {
-  position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0;
+  position: absolute; inset: 0;
+  overflow: hidden; pointer-events: none; z-index: 0;
 }
 
 /* Vignette masks removed */
@@ -84,13 +89,17 @@
 .glVignetteLeft  { display: none; }
 .glVignetteRight { display: none; }
 
-/* Ambient blobs */
+/* ✅ FIX: Ambient blobs — GPU-promoted بـ will-change + translateZ(0)
+   عشان blur() متعملش repaint على كل frame أثناء الـ scroll */
 .glGlow {
   position: absolute;
   border-radius: 50%;
   filter: blur(80px);
   pointer-events: none;
   z-index: 0;
+  /* الجوهر: نرفعهم على layer منفصل مرة واحدة */
+  will-change: transform;
+  transform: translateZ(0);
 }
 .glGlow1 {
   width: min(560px,80vw); height: min(480px,80vw);
@@ -163,6 +172,7 @@
   width: 100%;
   height: calc(var(--cw) * 297 / 210);
   margin: clamp(2.5rem, 5vw, 4rem) 0 0;
+  /* ✅ FIX: الـ stage نفسه يكون overflow:hidden بدون scrollbar */
   overflow: hidden;
 }
 
@@ -172,7 +182,6 @@
   width: var(--cw); aspect-ratio: 210 / 297;
   border-radius: 10px; overflow: hidden;
   will-change: transform, opacity;
-  /* ✅ إضافة backface-visibility عشان GPU layer مضمون على الموبايل */
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   transition: transform .55s cubic-bezier(.23,1,.32,1), opacity .55s cubic-bezier(.23,1,.32,1);
@@ -293,7 +302,9 @@
   font-family: 'DM Sans', sans-serif;
   background: #000;
   padding: clamp(5rem, 5vw, 4.5rem) 1rem 0;
-  position: relative; overflow: hidden;
+  position: relative;
+  /* ✅ FIX: overflow:hidden بدل overflow:hidden + الـ scroll اللي كان بيظهر */
+  overflow: hidden;
   width: 100vw; margin-left: calc(-50vw + 50%);
 }
 
@@ -309,13 +320,15 @@
     transparent 100%);
 }
 
-/* Blobs */
+/* ✅ FIX: Blobs — GPU layer منفصل تماماً */
 .accGlow {
   position: absolute;
   border-radius: 50%;
   filter: blur(80px);
   pointer-events: none;
   z-index: 0;
+  will-change: transform;
+  transform: translateZ(0);
 }
 .accGlow1 {
   width: min(520px,80vw); height: min(520px,80vw);

@@ -7,7 +7,8 @@ export const FOUNDERS: Founder[] = [
     title: 'Head of Quality Control',
     initials: 'SO',
     img: 'https://res.cloudinary.com/dncdx1dm9/image/upload/q_auto/f_auto/v1776413346/so_q67ixp.webp',
-    description: 'Leads the entire production team and owns the quality pipeline end-to-end. Sherif reviews every deliverable, ensures zero errors, and trains the team to consistently produce top-tier CVs and strategies that meet the highest professional standards.',
+    description:
+      'Leads the entire production team and owns the quality pipeline end-to-end. Sherif reviews every deliverable, ensures zero errors, and trains the team to consistently produce top-tier CVs and strategies that meet the highest professional standards.',
     whatsapp: 'https://wa.me/201025602076',
     instagram: 'https://www.instagram.com/sherifosama75',
     facebook: 'https://www.facebook.com/shryf.asamt.602830',
@@ -15,10 +16,11 @@ export const FOUNDERS: Founder[] = [
   {
     id: '02',
     name: 'Muhammed Abdelaty',
-    title: 'Technical Head',
+    title: 'Technical Head & Marketing Lead',   // ← عُدّل
     initials: 'MA',
     img: 'https://res.cloudinary.com/dncdx1dm9/image/upload/q_auto/f_auto/v1776413345/ma_b3pbwk.webp',
-    description: 'Architect of the technical backbone of Apex Identity. Muhammed builds the systems, templates, and infrastructure the team operates on, and owns all technical quality, ensuring every output is optimized, scalable, and performance-driven.',
+    description:
+      'Architect of the technical backbone of Apex Identity. Muhammed builds the systems, templates, and infrastructure the team operates on — ensuring every output is optimized and scalable. He also drives the marketing strategy, expanding the brand\'s digital reach and presence across all channels.',
     whatsapp: 'https://wa.me/201012857997',
     instagram: 'https://www.instagram.com/abdel2ty',
     facebook: 'https://www.facebook.com/abdel2ty',
@@ -29,7 +31,8 @@ export const FOUNDERS: Founder[] = [
     title: 'Social Media & Finance',
     initials: 'AK',
     img: 'https://res.cloudinary.com/dncdx1dm9/image/upload/q_auto/f_auto/v1776413345/ak_ov1ge2.webp',
-    description: 'Leads Apex Identity’s digital presence across all platforms. Ahmed creates content, manages accounts, drives engagement, and controls brand visibility. He also oversees financial operations, including payments, refunds, and business cash flow.',
+    description:
+      'Leads Apex Identity\'s digital presence across all platforms. Ahmed creates content, manages accounts, drives engagement, and controls brand visibility. He also oversees financial operations, including payments, refunds, and business cash flow.',
     whatsapp: 'https://wa.me/201090205892',
     instagram: 'https://www.instagram.com/ahmedkhalilp',
     facebook: 'https://www.facebook.com/ahmed.khalil.468963',
@@ -40,7 +43,8 @@ export const FOUNDERS: Founder[] = [
     title: 'Sales & Client Relations',
     initials: 'ZZ',
     img: 'https://res.cloudinary.com/dncdx1dm9/image/upload/q_auto/f_auto/v1776413376/zs_zkf3kq.webp',
-    description: 'Handles all client communication and sales operations. Zyad ensures every client gets clear guidance, fast support, and a smooth experience, answering questions and helping clients make the right decisions at every step.',
+    description:
+      'Handles all client communication and sales operations. Zyad ensures every client gets clear guidance, fast support, and a smooth experience — answering questions and helping clients make the right decisions at every step.',
     whatsapp: 'https://wa.me/201207708299',
     instagram: 'https://www.instagram.com/ziyad_shata_7',
     facebook: 'https://www.facebook.com/ziyad.shata',
